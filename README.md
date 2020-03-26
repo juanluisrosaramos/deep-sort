@@ -41,16 +41,10 @@ neural network (see below).
 
 The following example starts the tracker on one of the
 [MOT16 benchmark](https://motchallenge.net/data/MOT16/)
-sequences.
-We assume resources have been extracted to the repository root directory and
-the MOT16 benchmark data is in `./MOT16`:
+sequences. We assume resources have been extracted to the repository root directory and the MOT16 benchmark data is in `./MOT16`:
 ```
-python deep_sort_app.py \
-    --sequence_dir=./MOT16/test/MOT16-06 \
-    --detection_file=./resources/detections/MOT16_POI_test/MOT16-06.npy \
-    --min_confidence=0.3 \
-    --nn_budget=100 \
-    --display=True
+python deep_sort_app.py --sequence_dir=/media/juanluis/data1/mapubli/videos/MOT16/test/MOT16-06
+ --detection_file=detections/MOT16_POI_test/MOT16-06.npy --min_confidence=0.3   --nn_budget=100 --display=True
 ```
 Check `python deep_sort_app.py -h` for an overview of available options.
 There are also scripts in the repository to visualize results, generate videos,
@@ -58,12 +52,7 @@ and evaluate the MOT challenge benchmark.
 
 ## Generating detections
 
-Beside the main tracking application, this repository contains a script to
-generate features for person re-identification, suitable to compare the visual
-appearance of pedestrian bounding boxes using cosine similarity.
-The following example generates these features from standard MOT challenge
-detections. Again, we assume resources have been extracted to the repository
-root directory and MOT16 data is in `./MOT16`:
+Beside the main tracking application, this repository contains a script to generate features for person re-identification, suitable to compare the visual appearance of pedestrian bounding boxes using cosine similarity. The following example generates these features from standard MOT challenge detections. Again, we assume resources have been extracted to the repository root directory and MOT16 data is in `./MOT16`:
 ```
 python tools/generate_detections.py \
     --model=resources/networks/mars-small128.pb \
@@ -107,14 +96,11 @@ In package `deep_sort` is the main tracking code:
    the matching cascade.
 * `iou_matching.py`: This module contains the IOU matching metric.
 * `nn_matching.py`: A module for a nearest neighbor matching metric.
-* `track.py`: The track class contains single-target track data such as Kalman
-  state, number of hits, misses, hit streak, associated feature vectors, etc.
+* `track.py`: The track class contains single-target track data such as Kalman state, number of hits, misses, hit streak, associated feature vectors, etc.
 * `tracker.py`: This is the multi-target tracker class.
 
-The `deep_sort_app.py` expects detections in a custom format, stored in .npy
-files. These can be computed from MOTChallenge detections using
-`generate_detections.py`. We also provide
-[pre-generated detections](https://drive.google.com/open?id=1VVqtL0klSUvLnmBKS89il1EKC3IxUBVK).
+The `deep_sort_app.py` expects detections in a custom format, stored in .npy files. These can be computed from MOTChallenge detections using
+`generate_detections.py`. We also provide [pre-generated detections](https://drive.google.com/open?id=1VVqtL0klSUvLnmBKS89il1EKC3IxUBVK).
 
 ## Citing DeepSORT
 

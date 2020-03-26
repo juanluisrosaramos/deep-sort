@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--sequence_dir",
+                "/media/juanluis/data1/mapubli/videos/test/gente3",
+                "--detection_file",
+                "detections/MOT16_JL/gente3.npy",
+                "--min_confidence",
+                "0.3"
+            ]
+        }
+        // ,{
+        //     "name": "Python: Current File",
+        //     "type": "python",
+        //     "request": "launch",
+        //     "program": "/home/juanluis/workingrrr/mapubli/deep_sort/tools/generate_detections.py",
+        //     "console": "integratedTerminal",
+        //     "args": [
+        //         "--model",
+        //         "networks/mars-small128.pb",
+        //         "--mot_dir",
+        //         "/media/juanluis/data1/mapubli/videos/MOT16/test/MOTJL",
+        //         "--output_dir",
+        //         "detections/MOT16_JLTrue"
+        //     ]
+        // }
+    ]
+}

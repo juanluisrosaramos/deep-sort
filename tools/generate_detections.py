@@ -49,22 +49,20 @@ def extract_image_patch(image, bbox, patch_shape):
     if patch_shape is not None:
         # correct aspect ratio to patch shape
         target_aspect = float(patch_shape[1]) / patch_shape[0]
-        new_width = target_aspect * bbox[3]
-        bbox[0] -= (new_width - bbox[2]) / 2
+        new_width = target_aspect * bbox[3]        
+        bbox[0] -= (new_width - bbox[2]) / 2        
         bbox[2] = new_width
-
-    # convert to top left, bottom right
-    bbox[2:] += bbox[:2]
+    # # convert to top left, bottom right
+    bbox[2:] += bbox[:2]        
     bbox = bbox.astype(np.int)
-
     # clip at image boundaries
     bbox[:2] = np.maximum(0, bbox[:2])
     bbox[2:] = np.minimum(np.asarray(image.shape[:2][::-1]) - 1, bbox[2:])
-    if np.any(bbox[:2] >= bbox[2:]):
+    if np.any(bbox[:2] >= bbox[2:]):        
         return None
-    sx, sy, ex, ey = bbox
+    sx, sy, ex, ey = bbox    
     image = image[sy:ey, sx:ex]
-    image = cv2.resize(image, tuple(patch_shape[::-1]))
+    image = cv2.resize(image, tuple(patch_shape[::-1]))    
     return image
 
 
@@ -162,6 +160,7 @@ def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
         frame_indices = detections_in[:, 0].astype(np.int)
         min_frame_idx = frame_indices.astype(np.int).min()
         max_frame_idx = frame_indices.astype(np.int).max()
+        
         for frame_idx in range(min_frame_idx, max_frame_idx + 1):
             print("Frame %05d/%05d" % (frame_idx, max_frame_idx))
             mask = frame_indices == frame_idx
